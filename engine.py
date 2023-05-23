@@ -153,7 +153,7 @@ def evaluate(model, dataloader, device, cfg, args, save_image=False):
 
         if save_image:
             for batch_ind in range(1):
-                full_ind = i * 1 + batch_ind
+                full_ind = str(i * 1 + batch_ind).zfill(4)
                 save_image(output_list[-1][batch_ind], f'{visual_dir}/pred_{full_ind}.png')
                 save_image(data['img_gt'], f'{visual_dir}/gt_{full_ind}.png')
 
