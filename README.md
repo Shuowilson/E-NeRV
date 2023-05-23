@@ -48,3 +48,31 @@ Thanks to Hao Chen for his excellent work and implementation [NeRV](https://gith
 
 ## Contact
 If you have any questions, please feel free to email the authors.
+
+
+## Google Colab
+Install python 3.8
+```
+# first install python 3.8
+!sudo apt-get update -y
+!sudo apt-get install python3.6
+# change alternatives
+!sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
+# select python version
+!sudo update-alternatives --config python3
+# check python version
+!python --version
+# install pip for new python 
+!sudo apt-get install python3.6-distutils
+!wget https://bootstrap.pypa.io/get-pip.py
+!python get-pip.py
+# upgrade pip
+!sudo apt install python3-pip
+!python -m pip install --upgrade pip
+```
+
+Install pytorch for cuda11.7
+```
+!pip uninstall torch
+!pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
