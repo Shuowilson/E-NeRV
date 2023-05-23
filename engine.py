@@ -139,17 +139,34 @@ def evaluate(model, dataloader, device, cfg, args, save_image=False):
 
     psnr_list = []
     msssim_list = []
-
+  
+    if save_image:
+        from torchvision.utils import save_image
+        visual_dir = f'save/visualize'
+        print(f'Saving predictions to {visual_dir}')
+        if not os.path.isdir(visual_dir):
+            os.makedirs(visual_dir)
     for i, data in enumerate(dataloader):
         data = utils.to_cuda(data, device)
         # forward pass
         output_list = model(data)  # output is a list for the case that has multiscale
+
+        if save_image:
+            for batch_ind in range(1):
+                full_ind = i * 1 + batch_ind
+                save_image(output_list[-1][batch_ind], f'{visual_dir}/pred_{full_ind}.png')
+                save_image(data['img_gt'], f'{visual_dir}/gt_{full_ind}.png')
+
+
+
         if isinstance(output_list, dict):
             output_list = output_list["output_list"]  # ignore the loss in eval
         torch.cuda.synchronize()
         target_list = [
             F.adaptive_avg_pool2d(data["img_gt"], x.shape[-2:]) for x in output_list
         ]
+
+      
 
         # compute psnr and msssim
         psnr_list.append(utils.psnr_fn(output_list, target_list))

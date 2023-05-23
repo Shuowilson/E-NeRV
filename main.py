@@ -131,7 +131,7 @@ def main(args):
         # evaluation
         if (epoch + 1) % cfg['eval_freq'] == 0 or epoch > cfg['epoch'] - 10:
             val_stats = evaluate(
-                model, dataloader_val, device, cfg, args, save_image=False  # TODO: implement the save image
+                model, dataloader_val, device, cfg, args, save_image=True  # TODO: implement the save image
             )
             
             val_best_psnr = val_stats['val_psnr'][-1] if val_stats['val_psnr'][-1] > val_best_psnr else val_best_psnr
