@@ -1,5 +1,5 @@
 seed: 1  # same as the original NeRV repo
-dataset_path: ./data/bunny
+dataset_path: ./data/compressed
 dataset_type: all 
 model:
   model_name: E_NeRV
